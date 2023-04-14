@@ -1,7 +1,7 @@
 name: caller
 description: >-
   Get info on which function called a function, including line number, path et al, packaged into a handy class structure for easy access.
-version: 0.0.2
+version: 0.0.1
 repository: https://github.com/stobix/dart_caller
 
 environment:
