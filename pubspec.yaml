@@ -1,5 +1,6 @@
 name: caller
-description: A starting point for Dart libraries or applications.
+description: >-
+  Get info on which function called a function, including line number, path et al, packaged into a handy class structure for easy access.
 version: 0.0.2
 repository: https://github.com/stobix/dart_caller
 
