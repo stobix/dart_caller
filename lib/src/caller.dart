@@ -1,11 +1,11 @@
-class PackageCaller extends Caller{
+class PackageCaller extends Caller {
   PackageCaller({required super.stackPos, required super.functionName, required super.package, required super.fileName, required super.lineNumber, required super.columnNumber});
 
   @override
   String get path => "package:$package/$fileName:$lineNumber:$columnNumber";
 }
 class FileCaller extends Caller{
-  FileCaller({required super.stackPos, required super.functionName, required super.package, required super.fileName, required super.lineNumber, required super.columnNumber});
+  FileCaller({required super.stackPos, required super.functionName, required super.fileName, required super.lineNumber, required super.columnNumber}):super(package: null);
 
   @override
   String get path => "file://$fileName $lineNumber:$columnNumber";
@@ -14,13 +14,20 @@ class FileCaller extends Caller{
 /// Contains info on the calling function.
 abstract class Caller {
 
+  /// The position in the stacktrace.
   final int stackPos;
+  /// The name of the calling function.
   final String functionName;
-  final String package;
+  /// The name of the package, if available, else null.
+  final String? package;
+  /// The file name of the calling function.
   final String fileName;
+  /// The line number of the file of the calling function.
   final int lineNumber;
+  /// The column of the line of the file of the calling function.
   final int columnNumber;
 
+  /// A path to where the function got called, either a `file:` or a `package:` path.
   String get path;
 
   Caller({
@@ -60,7 +67,6 @@ abstract class Caller {
         return FileCaller(
             stackPos: int.parse(match.namedGroup("index")!),
             functionName: match.namedGroup("fnname")!,
-            package: "none",
             fileName: match.namedGroup("filnamn")!,
             lineNumber: int.parse(match.namedGroup("ln")!),
             columnNumber: int.parse(match.namedGroup("cn")!)
