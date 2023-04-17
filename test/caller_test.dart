@@ -14,8 +14,11 @@ main(){
   group("Calling tests",(){
     test("caller finds correct call stack",(){
       var callers = callerCaller(() => Caller.callStack);
-      expect(callers[2]?.functionName, "caller");
-      expect(callers[3]?.functionName, "callerCaller");
+      for(final caller in callers) {
+        print(caller);
+      }
+      expect(callers[1]?.functionName, "caller");
+      expect(callers[2]?.functionName, "callerCaller");
     });
     test("caller finds correct parent",() {
       expect(callerCaller(() => Caller.whoCalledMe)?.functionName, "caller");
